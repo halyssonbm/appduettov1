@@ -35,10 +35,10 @@ try:
     df = ler_produtos()
     if df.empty:
         df = produtos_iniciais.copy()
-        gravar_sheet("Produtos", df)
+        #gravar_sheet("Produtos", df)
 except:
     df = produtos_iniciais.copy()
-    gravar_sheet("Produtos", df)
+    #gravar_sheet("Produtos", df)
 
 # ------------------------------
 # CONVERSÃO SEGURA DE NÚMEROS
