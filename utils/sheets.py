@@ -22,14 +22,19 @@ import streamlit as st
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive",
+]
+
 def conectar():
-    # Carrega as credenciais do Streamlit Secrets
+    # Carrega credenciais do Streamlit Secrets
     creds_dict = json.loads(st.secrets["GOOGLE_CREDENTIALS"])
 
-    # Converte o dicionário em credenciais válidas
+    # Converte o dicionário para credenciais válidas
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
 
-    # Retorna a conexão autorizada
+    # Retorna o cliente gspread autenticado
     return gspread.authorize(creds)
 
 # ----------------------------------------------------------------------
