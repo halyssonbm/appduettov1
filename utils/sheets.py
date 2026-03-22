@@ -16,10 +16,21 @@ ID_PEDIDOS = "1PkrX8QwrPZn3ta9Ssco0NtDuCGAdVhJV0_tx6JFgdIQ"
 # ----------------------------------------------------------------------
 # CONEXÃO
 # ----------------------------------------------------------------------
-def conectar():
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", SCOPE)
-    return gspread.authorize(creds)
 
+import json
+import streamlit as st
+from oauth2client.service_account import ServiceAccountCredentials
+import gspread
+
+def conectar():
+    # Carrega as credenciais do Streamlit Secrets
+    creds_dict = json.loads(st.secrets["GOOGLE_CREDENTIALS"])
+
+    # Converte o dicionário em credenciais válidas
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
+
+    # Retorna a conexão autorizada
+    return gspread.authorize(creds)
 
 # ----------------------------------------------------------------------
 # LER PRODUTOS  (ESTÁVEL)
